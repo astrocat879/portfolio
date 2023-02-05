@@ -12,6 +12,11 @@ body {
   font-size: 18px;
 }
 
+p {
+  padding-top: .3rem;
+  padding-bottom: .3rem;
+}
+
 * {
   box-sizing: border-box;
 }

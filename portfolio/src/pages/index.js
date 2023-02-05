@@ -16,7 +16,6 @@ export default function Home() {
           About Me
         </h1>
       </div>
-      <hr className="mt-0"/>
     </Layout>
   );
 }

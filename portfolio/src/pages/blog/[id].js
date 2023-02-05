@@ -2,6 +2,7 @@ import { getAllPostIds, getPostData } from "@/lib/posts";
 import Layout from "../../components/layout";
 import Head from "next/head";
 import Date from "@/components/date";
+import Link from "next/link";
 
 export default function Post({ postData }) {
   return (
@@ -16,6 +17,9 @@ export default function Post({ postData }) {
           <div dangerouslySetInnerHTML={{ __html: postData.contentHtml }} />
         </div>
       </section>
+      <h2>
+        <Link className="text-gray-500" href="/">← Back to home</Link>
+      </h2>
     </Layout>
   );
 }

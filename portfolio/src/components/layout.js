@@ -9,13 +9,13 @@ export default function Layout({ children }) {
           {" "}
           Justin Zhu{" "}
         </Link>
-        <Link href="/projects" className="text-gray-500 text-xl mr-6">
-          {" "}
-          Projects{" "}
-        </Link>
         <Link href="/archive" className="text-gray-500 text-xl mr-6">
           {" "}
           Blog{" "}
+        </Link>
+        <Link href="/projects" className="text-gray-500 text-xl mr-6">
+          {" "}
+          Projects{" "}
         </Link>
       </div>
       <div className="flex mx-36 mt-6">

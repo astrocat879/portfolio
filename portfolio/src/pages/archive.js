@@ -18,7 +18,7 @@ export default function Archive({ allPostsData }) {
         <ul className="p-6 divide-y">
           {allPostsData.map(({ id, date, title }) => (
             <li className="py-1" key={id}>
-              <Link href={`/blog/${id}`}>{title}</Link>
+              <Link className="text-black" href={`/blog/${id}`}>{title}</Link>
               <br />
               <Date dateString={date} />
             </li>

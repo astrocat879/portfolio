@@ -8,6 +8,8 @@ import Date from "@/components/date";
 //Write a fetcher function to wrap the native fetch function and return the result of a call to url in json format
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
+
+// TO DO: MOVE THE API CALLING INTO A SEPARATE FILE AND PASS IN THE JSON AS A STATIC PROP (SO IT ONLY CALLS ONCE)
 export default function Projects() {
   //Set up SWR to run the fetcher function when calling "/api/staticdata"
   //There are 3 possible states: (1) loading when data is null (2) ready when the data is returned (3) error when there was an error fetching the data

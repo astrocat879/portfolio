@@ -4,7 +4,7 @@ import Link from "next/link";
 import { getSortedPostsData } from "../lib/posts";
 import Date from "@/components/date";
 
-export default function Archive({ allPostsData }) {
+export default function Archive({ data }) {
   return (
     <Layout>
       <Head>
@@ -16,9 +16,11 @@ export default function Archive({ allPostsData }) {
       <section>
         <h1 className="text-lg font-bold">Blog Archive</h1>
         <ul className="p-6 divide-y">
-          {allPostsData.map(({ id, date, title }) => (
+          {JSON.parse(data).map(({ id, date, title }) => (
             <li className="py-1" key={id}>
-              <Link className="text-black" href={`/blog/${id}`}>{title}</Link>
+              <Link className="text-black" href={`/blog/${id}`}>
+                {title}
+              </Link>
               <br />
               <Date dateString={date} />
             </li>
@@ -30,10 +32,11 @@ export default function Archive({ allPostsData }) {
 }
 
 export async function getStaticProps() {
-  const allPostsData = getSortedPostsData();
+  const allPostsData = await getSortedPostsData();
+  const data = JSON.stringify(allPostsData);
   return {
     props: {
-      allPostsData,
+      data,
     },
   };
 }

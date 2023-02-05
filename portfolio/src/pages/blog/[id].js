@@ -5,20 +5,24 @@ import Date from "@/components/date";
 import Link from "next/link";
 
 export default function Post({ postData }) {
+  console.log("POST DATA: ", postData)
+  postData = JSON.parse(postData)
   return (
     <Layout>
       <Head>
-        <title>{postData.title}</title>
+        <title>{postData.postData.title}</title>
       </Head>
       <section>
-        <h1>{postData.title}</h1>
-        <Date dateString={postData.date} />
+        <h1>{postData.postData.title}</h1>
+        <Date dateString={postData.postData.date} />
         <div className="p-6">
           <div dangerouslySetInnerHTML={{ __html: postData.contentHtml }} />
         </div>
       </section>
       <h2>
-        <Link className="text-gray-500" href="/">← Back to home</Link>
+        <Link className="text-gray-500" href="/">
+          ← Back to home
+        </Link>
       </h2>
     </Layout>
   );
@@ -26,19 +30,20 @@ export default function Post({ postData }) {
 
 // Gets a list of possible url names
 export async function getStaticPaths() {
-  const paths = getAllPostIds();
+  const paths = await getAllPostIds();
   return {
     paths,
     fallback: false,
   };
 }
 
-export async function getStaticProps({ params }) { // param is the slug (the path fetched from getStaticPaths)
-  
-  const postData = await getPostData(params.id);
+export async function getStaticProps({ params }) {
+  // param is the slug (the path fetched from getStaticPaths)
+  const data = await getPostData(params.id);
+  const postData = JSON.stringify(data)
   return {
     props: {
-      postData,
+      postData
     },
   };
 }

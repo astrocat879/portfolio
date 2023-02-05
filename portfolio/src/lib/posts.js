@@ -1,42 +1,15 @@
 // needed temporarily to parse local md files
 // later, i'll just be fetching a json file from mongodb
-
-import fs from "fs";
-import path from "path";
-import matter from "gray-matter";
+import clientPromise from "./mongodb";
 import { remark } from "remark";
 import html from "remark-html";
 
-const postsDirectory = path.join(process.cwd(), "src/posts");
-
-// export async function getSortedPostsData() {
-//     // Instead of the file system,
-//     // fetch post data from an external API endpoint
-//     const res = await fetch('..');
-//     return res.json();
-//   } see https://nextjs.org/learn/basics/data-fetching/getstaticprops-details
-
 // fetching for the archive list
-export function getSortedPostsData() {
-  // Get file names under /posts
-  const fileNames = fs.readdirSync(postsDirectory);
-  const allPostsData = fileNames.map((fileName) => {
-    // Remove ".md" from file name to get id
-    const id = fileName.replace(/\.md$/, "");
+export async function getSortedPostsData() {
+  const client = await clientPromise;
+  const db = client.db("store");
 
-    // Read markdown file as string
-    const fullPath = path.join(postsDirectory, fileName);
-    const fileContents = fs.readFileSync(fullPath, "utf8");
-
-    // Use gray-matter to parse the post metadata section
-    const matterResult = matter(fileContents);
-
-    // Combine the data with the id
-    return {
-      id,
-      ...matterResult.data,
-    };
-  });
+  const allPostsData = await db.collection("blog posts").find().toArray();
   // Sort posts by date
   return allPostsData.sort((a, b) => {
     if (a.date < b.date) {
@@ -48,36 +21,47 @@ export function getSortedPostsData() {
 }
 
 // fetching for the specific blog posts
-export async function getPostData(id) {
-  const fullPath = path.join(postsDirectory, `${id}.md`);
-  const fileContents = fs.readFileSync(fullPath, "utf8");
+export async function getPostData(search_id) {
+  const client = await clientPromise;
+  const db = client.db("store");
 
-  // Use gray-matter to parse the post metadata section
-  const matterResult = matter(fileContents);
+  const postData = await db.collection("blog posts").findOne( { id: search_id } );
 
   // Use remark to convert markdown into HTML string
   const processedContent = await remark()
     .use(html)
-    .process(matterResult.content);
-  const contentHtml = processedContent.toString();
+    .process(postData.content);
+  let contentHtml = processedContent.toString();
+
+  // Hack-ish solution to split the paragraphs correctly
+  contentHtml = contentHtml.replace("<p>", "").replace("</p>", "");
+  console.log("content: ", contentHtml)
+  let split = contentHtml.split("\n")
+  console.log("split: ", split)
+  split = split.map((str) => {
+    return "<p>"+str+"</p>"
+  })
+  console.log("split: ", split)
+  contentHtml = split.join("")
 
   // Combine the data with the id and contentHtml
   return {
-    id,
+    postData,
     contentHtml,
-    ...matterResult.data,
   };
 }
 
 // fetching all static paths
-// instead of grabbing file names i would have to get the name of the json object or something
-export function getAllPostIds() {
-  const fileNames = fs.readdirSync(postsDirectory);
+export async function getAllPostIds() {
+  const client = await clientPromise;
+  const db = client.db("store");
 
-  return fileNames.map((fileName) => {
+  const allPostsData = await db.collection("blog posts").find().toArray();
+
+  return allPostsData.map((post) => {
     return {
       params: {
-        id: fileName.replace(/\.md$/, ""),
+        id: post.id,
       },
     };
   });

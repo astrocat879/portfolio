@@ -5,8 +5,6 @@ import Date from "@/components/date";
 import Link from "next/link";
 
 export default function Post({ postData }) {
-  console.log("POST DATA: ", postData)
-  postData = JSON.parse(postData)
   return (
     <Layout>
       <Head>

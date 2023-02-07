@@ -1,5 +1,3 @@
-// needed temporarily to parse local md files
-// later, i'll just be fetching a json file from mongodb
 import clientPromise from "./mongodb";
 import { remark } from "remark";
 import html from "remark-html";

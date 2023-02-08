@@ -5,6 +5,8 @@ import Date from "@/components/date";
 import Image from "next/image";
 import { getProjectData } from "@/lib/projects";
 
+// TO DO: change container for projects into grid
+
 export default function Projects({ projList }) {
   return (
     <Layout>
@@ -12,16 +14,20 @@ export default function Projects({ projList }) {
         <title>Justin Zhu - Projects</title>
         <meta name="description" content="Portfolio site" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        {/* <link rel="icon" href="/favicon.ico" /> */}
       </Head>
-      <h1 className="text-lg font-bold">Projects</h1>
-      <ul className="p-6 divide-y flex">
+      <h1 className="text-2xl font-bold">Projects</h1>
+      <ul className="p-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
         {JSON.parse(projList).map((project) => (
           <li
             className="max-w-sm rounded overflow-hidden shadow-lg m-2"
             key={project.title}
           >
-            <Image src={project.image} alt="" width="500" height="300" object-fit="cover" overflow="hidden"/>
+            <img
+              className="w-full h-48 object-cover"
+              src={project.image}
+              loading="lazy"
+              alt={""}
+            />
             <div className="px-6 py-4">
               <Link
                 className="text-black font-bold text-xl mb-2"

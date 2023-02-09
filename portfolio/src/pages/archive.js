@@ -14,7 +14,7 @@ export default function Archive({ data }) {
         {/* <link rel="icon" href="/favicon.ico" /> */}
       </Head>
       <section>
-        <h1 className="text-lg font-bold">Blog Archive</h1>
+        <h1 className="text-2xl font-bold">Blog Archive</h1>
         <ul className="p-6 divide-y">
           {JSON.parse(data).map(({ id, date, title }) => (
             <li className="py-1" key={id}>

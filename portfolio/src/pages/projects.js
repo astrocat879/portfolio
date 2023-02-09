@@ -5,8 +5,6 @@ import Date from "@/components/date";
 import Image from "next/image";
 import { getProjectData } from "@/lib/projects";
 
-// TO DO: change container for projects into grid
-
 export default function Projects({ projList }) {
   return (
     <Layout>
@@ -19,10 +17,10 @@ export default function Projects({ projList }) {
       <ul className="p-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
         {JSON.parse(projList).map((project) => (
           <li
-            className="max-w-sm rounded overflow-hidden shadow-lg m-2"
+            className="max-w-sm rounded overflow-hidden shadow-lg m-2 transform transition duration-300 hover:scale-105"
             key={project.title}
           >
-            <img
+            <img // TO DO: Change img into next/Image
               className="w-full h-48 object-cover"
               src={project.image}
               loading="lazy"

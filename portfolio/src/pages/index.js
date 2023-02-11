@@ -11,13 +11,25 @@ export default function Home() {
         <meta name="description" content="Portfolio site" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
-      <div className="grid-cols-2">
-        <h1 className="text-2xl font-bold text-right">
-          Hi, I'm Justin!
-        </h1>
-        <img className="shadow rounded-full max-h-full w-auto border-none" src=""></img>
-        <p> I'm a first-year Computer Science student at the University of Waterloo. </p>
-        <p> I love to engage with storytelling through reading and writing</p>
+      <h1 className="text-2xl font-bold">Hi! I'm Justin.</h1>
+      <div className="p-6 grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="md:order-last">
+          <img
+            className="shadow rounded-full max-h-full w-auto border-none"
+            src="https://i.imgur.com/Xpw8XcZ.jpg"
+          ></img>
+        </div>
+        <div className="col-span-2">
+          <p>
+            I'm a Computer Science student at the University of
+            Waterloo interested in full-stack, competitive programming, game development, and more. Check out my <Link className="text-black underline" href="/projects">projects</ Link>!
+          </p>
+          <p>
+            Outside of programming, I'm trying my best to read more novels and learn Chinese. I write about hobbies, development, and more in my <Link className="text-black underline" href="/archive">blog</ Link> (it's a bit sparse right now though).
+          </p>
+          <i className="fa-brands fa-github"></i>
+        </div>
+        
       </div>
     </Layout>
   );

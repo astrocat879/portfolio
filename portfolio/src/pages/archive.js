@@ -18,7 +18,7 @@ export default function Archive({ data }) {
         <ul className="p-6 divide-y">
           {JSON.parse(data).map(({ id, date, title }) => (
             <li className="py-1" key={id}>
-              <Link className="text-black" href={`/blog/${id}`}>
+              <Link className="text-black font-bold" href={`/blog/${id}`}>
                 {title}
               </Link>
               <br />

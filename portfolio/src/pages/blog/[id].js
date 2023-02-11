@@ -12,15 +12,15 @@ export default function Post({ postData }) {
         <title>{postData.postData.title}</title>
       </Head>
       <section>
-        <h1>{postData.postData.title}</h1>
+        <h1 className="font-bold">{postData.postData.title}</h1>
         <Date dateString={postData.postData.date} />
         <div className="p-6">
           <div dangerouslySetInnerHTML={{ __html: postData.contentHtml }} />
         </div>
       </section>
       <h2>
-        <Link className="text-gray-500" href="/">
-          ← Back to home
+        <Link className="text-gray-500" href="/archive">
+          ← Back to archive
         </Link>
       </h2>
     </Layout>

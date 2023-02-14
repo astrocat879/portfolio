@@ -5,7 +5,7 @@ import Head from "next/head";
 export default function Layout({ children }) {
   return (
     <div>
-      <div className="flex flex-wrap items-center justify-start p-4 md:p-8 bg-slate-100">
+      <div className="flex flex-wrap items-center justify-start py-4 md:px-16 bg-slate-100">
         <div className="w-full md:w-fit text-center md:text-left md:px-6">
           <Link href="/" className="text-black font-bold text-2xl">
             {" "}
@@ -23,7 +23,7 @@ export default function Layout({ children }) {
           </Link>
         </div>
       </div>
-      <div className="flex mx-16 mt-6 lg:mx-36 lg:mt-6">
+      <div className="flex mx-4 sm:mx-16 mt-6 lg:mx-36 lg:mt-6">
         <main>{children}</main>
       </div>
       <footer className="flex justify-center content-end">

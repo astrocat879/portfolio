@@ -13,7 +13,7 @@ export default function Projects({ projList }) {
         <meta name="description" content="Portfolio site" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
-      <h1 className="text-2xl font-bold">Projects</h1>
+      <h1 className="px-6 text-2xl font-bold">Projects</h1>
       <ul className="p-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
         {JSON.parse(projList).map((project) => (
           <li
